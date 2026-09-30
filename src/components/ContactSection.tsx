@@ -401,8 +401,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessToast }
           <div className="lg:col-span-5 space-y-6">
             
             {/* Direct Email Card */}
-            <div className="p-6 rounded-3xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">
+            <div className="p-6 rounded-3xl bg-slate-100/70 dark:bg-slate-900 border border-slate-300/80 dark:border-slate-800 shadow-xs">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200 block mb-1">
                 Direct Email Address
               </span>
               <div className="flex items-center justify-between gap-3 mt-2">
@@ -439,10 +439,15 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessToast }
             </div>
 
             {/* Social Media Links Grid */}
-            <div className="p-6 rounded-3xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-4">
-                Social Profiles & Networks
-              </span>
+            <div className="p-6 rounded-3xl bg-slate-100/70 dark:bg-slate-900 border border-slate-300/80 dark:border-slate-800 shadow-xs">
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">
+                  Social Profiles & Networks
+                </span>
+                <span className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 font-semibold">
+                  Direct Connect
+                </span>
+              </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 {SOCIAL_LINKS.map(link => (
@@ -451,16 +456,22 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessToast }
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 rounded-2xl bg-white dark:bg-slate-850 border border-slate-200/80 dark:border-slate-750 flex items-center justify-between text-slate-700 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-400 hover:border-emerald-500/50 shadow-2xs transition-all group"
+                    className="p-3 rounded-2xl bg-white dark:bg-slate-800 border border-slate-300/90 dark:border-slate-700/90 flex items-center justify-between text-slate-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 hover:border-emerald-500/80 shadow-xs hover:shadow-md transition-all group"
                   >
-                    <div className="flex items-center gap-2.5">
-                      <DynamicIcon name={link.iconName} className="w-4 h-4 text-slate-500 group-hover:text-emerald-500 transition-colors" />
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-slate-100 group-hover:bg-emerald-600 group-hover:text-white flex items-center justify-center shrink-0 transition-colors shadow-2xs">
+                        <DynamicIcon name={link.iconName} className="w-4 h-4" />
+                      </div>
                       <div>
-                        <span className="font-semibold text-xs block">{link.name}</span>
-                        <span className="text-[10px] text-slate-400 font-mono">{link.handle}</span>
+                        <span className="font-bold text-xs text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 block transition-colors">
+                          {link.name}
+                        </span>
+                        <span className="text-[11px] text-slate-600 dark:text-slate-300 font-mono font-medium block">
+                          {link.handle}
+                        </span>
                       </div>
                     </div>
-                    <ExternalLink className="w-3.5 h-3.5 text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-emerald-500 shrink-0 transition-colors" />
                   </a>
                 ))}
               </div>
