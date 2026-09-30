@@ -14,7 +14,7 @@ import {
   Sparkles,
   ArrowRight
 } from 'lucide-react';
-import { PERSONAL_INFO, SOCIAL_LINKS } from '../data/portfolioData';
+import { PERSONAL_INFO, SOCIAL_LINKS, CONTACT_CONFIG } from '../data/portfolioData';
 import { ContactFormData } from '../types';
 import { DynamicIcon } from './SocialIcons';
 import { AppsScriptConfigModal } from './AppsScriptConfigModal';
@@ -49,6 +49,7 @@ function parseJwt(token: string) {
 
 export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessToast }) => {
   const projectTypes = [
+    'AI Agent Development & Multi-Agent Workflows',
     'General Consulting',
     'Server Hardening & Security Audit',
     'Cloud Migration (AWS / GCP)',
@@ -68,11 +69,19 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessToast }
   });
 
   const [appsScriptUrl, setAppsScriptUrl] = useState<string>(() => {
-    return localStorage.getItem('portfolio_apps_script_url') || '';
+    return (
+      localStorage.getItem('portfolio_apps_script_url') ||
+      CONTACT_CONFIG.appsScriptUrl ||
+      ''
+    );
   });
 
   const [googleClientId, setGoogleClientId] = useState<string>(() => {
-    return localStorage.getItem('portfolio_google_client_id') || '';
+    return (
+      localStorage.getItem('portfolio_google_client_id') ||
+      CONTACT_CONFIG.googleClientId ||
+      ''
+    );
   });
 
   const [isConfigModalOpen, setIsConfigModalOpen] = useState(false);
@@ -278,9 +287,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessToast }
     setLastSubmittedPayload(payload);
 
     // 1. If Google Apps Script Web App URL is configured, POST directly to it!
-    if (appsScriptUrl && appsScriptUrl.includes('script.google.com/macros/s/')) {
+    const targetAppsScriptUrl = appsScriptUrl || CONTACT_CONFIG.appsScriptUrl;
+    if (targetAppsScriptUrl && targetAppsScriptUrl.includes('script.google.com/macros/s/')) {
       try {
-        await fetch(appsScriptUrl, {
+        await fetch(targetAppsScriptUrl, {
           method: 'POST',
           mode: 'no-cors', // Google Apps Script Web App redirect standard
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
@@ -522,138 +532,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessToast }
                       />
                     </div>
 
-                    {/* Google OAuth Auto-Detected Sender (NO manual email input field) */}
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-                          <span>Verified Google Account</span>
-                          <span className="text-rose-500">*</span>
-                        </span>
-                        <span className="text-[11px] text-emerald-600 dark:text-emerald-400 font-mono">
-                          Auto-Detected via OAuth
-                        </span>
-                      </div>
-
-                      {googleUser ? (
-                        /* Connected Google Account Banner - Email Field Hidden as Requested */
-                        <div className="p-3.5 rounded-2xl bg-white dark:bg-slate-800 border border-emerald-500/40 flex items-center justify-between gap-3 shadow-2xs">
-                          <div className="flex items-center gap-3">
-                            {googleUser.picture ? (
-                              <img 
-                                src={googleUser.picture} 
-                                alt={googleUser.name} 
-                                className="w-9 h-9 rounded-full ring-2 ring-emerald-500/50"
-                              />
-                            ) : (
-                              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 text-white flex items-center justify-center font-bold text-sm shadow-xs">
-                                {googleUser.name.charAt(0).toUpperCase()}
-                              </div>
-                            )}
-                            <div>
-                              <div className="flex items-center gap-1.5">
-                                <span className="text-xs font-bold text-slate-900 dark:text-white">
-                                  {googleUser.name}
-                                </span>
-                                <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-1.5 py-0.2 rounded-md">
-                                  <CheckCircle2 className="w-3 h-3" />
-                                  <span>email_verified</span>
-                                </span>
-                              </div>
-                              <span className="text-xs font-mono text-emerald-600 dark:text-emerald-400 font-medium">
-                                {googleUser.email}
-                              </span>
-                            </div>
-                          </div>
-
-                          <button
-                            type="button"
-                            onClick={handleSignOutGoogle}
-                            className="p-1.5 text-slate-400 hover:text-rose-500 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
-                            title="Sign out or switch Google account"
-                          >
-                            <LogOut className="w-4 h-4" />
-                          </button>
-                        </div>
-                      ) : (
-                        /* Auto-Detect / 1-Click Connect Button (Zero manual text inputs by default) */
-                        <div className="p-4 rounded-2xl bg-slate-100/80 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-3 text-center">
-                          <div className="flex items-center justify-center gap-2 text-xs text-slate-600 dark:text-slate-300">
-                            <Sparkles className="w-3.5 h-3.5 text-emerald-500" />
-                            <span>Auto-detect active Gmail session via Google OAuth</span>
-                          </div>
-
-                          {/* Official Google GIS Button Container (Only if valid Client ID configured) */}
-                          {isValidGoogleClientId && (
-                            <div ref={googleBtnContainerRef} className="flex justify-center" />
-                          )}
-
-                          {/* 1-Click Auto-Detect Button */}
-                          <button
-                            type="button"
-                            onClick={handleAutoDetectGoogle}
-                            className="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-white dark:bg-slate-700 hover:bg-slate-50 dark:hover:bg-slate-650 text-slate-800 dark:text-white border border-slate-300 dark:border-slate-600 shadow-2xs inline-flex items-center justify-center gap-2.5 transition-all cursor-pointer"
-                          >
-                            <svg className="w-4 h-4" viewBox="0 0 24 24">
-                              <path
-                                fill="#4285F4"
-                                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                              />
-                              <path
-                                fill="#34A853"
-                                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                              />
-                              <path
-                                fill="#FBBC05"
-                                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
-                              />
-                              <path
-                                fill="#EA4335"
-                                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
-                              />
-                            </svg>
-                            <span>Auto-Detect & Connect Google Account</span>
-                          </button>
-
-                          {/* Fallback manual email toggle if visitor prefers typing another address */}
-                          <div className="pt-1 flex items-center justify-between text-[11px] text-slate-500">
-                            <button
-                              type="button"
-                              onClick={() => setShowManualEmail(!showManualEmail)}
-                              className="text-slate-500 hover:text-emerald-500 dark:hover:text-emerald-400 underline cursor-pointer"
-                            >
-                              {showManualEmail ? 'Hide manual email input' : 'Or type custom email address'}
-                            </button>
-
-                            {!isValidGoogleClientId && (
-                              <button
-                                type="button"
-                                onClick={() => setIsConfigModalOpen(true)}
-                                className="text-emerald-600 dark:text-emerald-400 hover:underline inline-flex items-center gap-1 cursor-pointer"
-                              >
-                                <Settings className="w-3 h-3" />
-                                <span>OAuth Setup Guide</span>
-                              </button>
-                            )}
-                          </div>
-
-                          {showManualEmail && (
-                            <div className="pt-2 text-left">
-                              <input
-                                type="email"
-                                value={formData.email}
-                                onChange={e => {
-                                  setFormData({ ...formData, email: e.target.value });
-                                }}
-                                placeholder="name@example.com"
-                                className="w-full px-3.5 py-2 rounded-xl text-xs bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                              />
-                            </div>
-                          )}
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Consulting Area / Engagement Focus ("General Consulting" default) */}
+                    {/* Consulting Area / Engagement Focus ("AI Agent Development" top choice) */}
                     <div className="space-y-1.5">
                       <label htmlFor="contact-project-type" className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                         Consulting Area / Engagement Focus
@@ -698,9 +577,118 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessToast }
                         rows={4}
                         value={formData.message}
                         onChange={e => setFormData({ ...formData, message: e.target.value })}
-                        placeholder="Describe your current server topology, objectives, or questions..."
+                        placeholder="Describe your current objectives, AI workflows, server topology, or questions..."
                         className="w-full px-4 py-2.5 rounded-xl text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
                       />
+                    </div>
+
+                    {/* Verified Human Section (Moved just under Message Details, before Send button) */}
+                    <div className="space-y-2 pt-1">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                          <span>Verified Human</span>
+                          <span className="text-rose-500">*</span>
+                        </span>
+                        <span className="text-[11px] text-emerald-600 dark:text-emerald-400 font-mono">
+                          Auto-Detected via OAuth
+                        </span>
+                      </div>
+
+                      {googleUser ? (
+                        /* Centered human_verified Badge with Tick Mark & Sign Out strictly on Right Side */
+                        <div className="relative py-2.5 px-4 rounded-xl bg-emerald-500/5 dark:bg-emerald-950/20 border border-emerald-500/20 flex items-center justify-center">
+                          <span className="inline-flex items-center gap-2 text-sm sm:text-base font-semibold text-emerald-600 dark:text-emerald-400">
+                            <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
+                            <span>human_verified</span>
+                          </span>
+
+                          <button
+                            type="button"
+                            onClick={handleSignOutGoogle}
+                            className="absolute right-3 p-1.5 text-slate-400 hover:text-rose-500 rounded-lg hover:bg-slate-200/60 dark:hover:bg-slate-800 transition-colors inline-flex items-center justify-center cursor-pointer"
+                            title="Sign out or switch Google account"
+                            aria-label="Sign out"
+                          >
+                            <LogOut className="w-4 h-4" />
+                          </button>
+                        </div>
+                      ) : (
+                        /* Auto-Detect / 1-Click Connect Button (Zero manual text inputs by default) */
+                        <div className="p-4 rounded-2xl bg-slate-100/80 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-3 text-center">
+                          <div className="flex items-center justify-center gap-2 text-xs text-slate-600 dark:text-slate-300">
+                            <Sparkles className="w-3.5 h-3.5 text-emerald-500" />
+                            <span>Verify humanity via active Google account</span>
+                          </div>
+
+                          {/* Official Google GIS Button Container (Only if valid Client ID configured) */}
+                          {isValidGoogleClientId && (
+                            <div ref={googleBtnContainerRef} className="flex justify-center" />
+                          )}
+
+                          {/* 1-Click Auto-Detect Button */}
+                          <button
+                            type="button"
+                            onClick={handleAutoDetectGoogle}
+                            className="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-white dark:bg-slate-700 hover:bg-slate-50 dark:hover:bg-slate-650 text-slate-800 dark:text-white border border-slate-300 dark:border-slate-600 shadow-2xs inline-flex items-center justify-center gap-2.5 transition-all cursor-pointer"
+                          >
+                            <svg className="w-4 h-4" viewBox="0 0 24 24">
+                              <path
+                                fill="#4285F4"
+                                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                              />
+                              <path
+                                fill="#34A853"
+                                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                              />
+                              <path
+                                fill="#FBBC05"
+                                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
+                              />
+                              <path
+                                fill="#EA4335"
+                                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
+                              />
+                            </svg>
+                            <span>Verify Human with Google Account</span>
+                          </button>
+
+                          {/* Fallback manual email toggle if visitor prefers typing another address */}
+                          <div className="pt-1 flex items-center justify-between text-[11px] text-slate-500">
+                            <button
+                              type="button"
+                              onClick={() => setShowManualEmail(!showManualEmail)}
+                              className="text-slate-500 hover:text-emerald-500 dark:hover:text-emerald-400 underline cursor-pointer"
+                            >
+                              {showManualEmail ? 'Hide manual email input' : 'Or type custom email address'}
+                            </button>
+
+                            {!isValidGoogleClientId && (
+                              <button
+                                type="button"
+                                onClick={() => setIsConfigModalOpen(true)}
+                                className="text-emerald-600 dark:text-emerald-400 hover:underline inline-flex items-center gap-1 cursor-pointer"
+                              >
+                                <Settings className="w-3 h-3" />
+                                <span>OAuth Setup Guide</span>
+                              </button>
+                            )}
+                          </div>
+
+                          {showManualEmail && (
+                            <div className="pt-2 text-left">
+                              <input
+                                type="email"
+                                value={formData.email}
+                                onChange={e => {
+                                  setFormData({ ...formData, email: e.target.value });
+                                }}
+                                placeholder="name@example.com"
+                                className="w-full px-3.5 py-2 rounded-xl text-xs bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                              />
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </div>
 
                     {/* Submit Button */}

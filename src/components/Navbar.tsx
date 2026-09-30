@@ -79,7 +79,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               </div>
               <span className="text-[10px] text-slate-500 dark:text-slate-400 font-medium tracking-wide uppercase">
-                Linux & Cloud Infra
+                AI Agent & Cloud Infra
               </span>
             </div>
           </a>

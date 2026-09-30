@@ -9,10 +9,12 @@ import {
   CheckCircle2, 
   AlertCircle, 
   ShieldCheck, 
-  RefreshCw,
-  Mail,
-  HelpCircle
+  RefreshCw, 
+  Mail, 
+  HelpCircle,
+  FileCode
 } from 'lucide-react';
+import { CONTACT_CONFIG } from '../data/portfolioData';
 
 interface AppsScriptConfigModalProps {
   isOpen: boolean;
@@ -297,6 +299,37 @@ export const AppsScriptConfigModal: React.FC<AppsScriptConfigModalProps> = ({
                 <p className="text-[11px] text-slate-500 dark:text-slate-400">
                   Deploy your Apps Script project with <strong>Execute as: Me</strong> and <strong>Who has access: Anyone</strong>.
                 </p>
+
+                {/* Permanent Project Configuration Callout */}
+                <div className="p-3.5 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-2">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+                      <FileCode className="w-3.5 h-3.5 text-emerald-500" />
+                      <span>Permanent Project Configuration (Zero Setup for Visitors)</span>
+                    </span>
+                    {CONTACT_CONFIG.appsScriptUrl ? (
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+                        Baked in Source Code
+                      </span>
+                    ) : (
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400">
+                        Browser Storage Only
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+                    To make this URL permanent for <strong>all visitors on all devices</strong> without typing it in every time, paste it into <code className="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 font-mono text-[10px]">src/data/portfolioData.ts</code>:
+                  </p>
+                  <pre className="p-2.5 rounded-lg bg-slate-950 text-slate-200 font-mono text-[10px] overflow-x-auto border border-slate-800">
+                    <code>{`export const CONTACT_CONFIG = {
+  appsScriptUrl: '${urlInput || 'https://script.google.com/macros/s/AKfycb.../exec'}',
+  ...
+};`}</code>
+                  </pre>
+                  <p className="text-[10px] text-slate-500 dark:text-slate-400">
+                    Once pushed to GitHub, GitHub Pages compiles this URL directly into the live site!
+                  </p>
+                </div>
               </div>
 
               {testResult && (

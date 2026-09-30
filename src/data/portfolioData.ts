@@ -1,13 +1,27 @@
 import { SocialLink, SkillCategory, ExperienceItem, ProjectItem, BlogPost, ReviewItem } from '../types';
 
+export const CONTACT_CONFIG = {
+  // =========================================================================
+  // PERMANENT GOOGLE APPS SCRIPT WEB APP URL
+  // Configured with your live Google Apps Script deployment URL.
+  // Works automatically on https://shamim4s.github.io and locally via .env!
+  // =========================================================================
+  appsScriptUrl: 
+    ((import.meta as any).env?.VITE_APPS_SCRIPT_URL as string) || 
+    'https://script.google.com/macros/s/AKfycbw-x3tbPmRQfmDWS1dP2EArFp2WDilqA3qaKoo3QV_n9CtxKZfiM-3Fe5ikvRaSyC2c/exec',
+
+  // Optional: Permanent Google OAuth Client ID (e.g. "123456789-xxx.apps.googleusercontent.com")
+  googleClientId: ((import.meta as any).env?.VITE_GOOGLE_CLIENT_ID as string) || ''
+};
+
 export const PERSONAL_INFO = {
   name: 'Md Shamim Mia',
   handle: 'shamim4s',
   avatarUrl: 'https://github.com/shamim4s.png',
   fallbackAvatarUrl: 'https://avatars.githubusercontent.com/u/85999549?v=4',
-  title: 'IT Manager & Linux Infrastructure Engineer',
-  tagline: 'IT Manager at Japna Bangladesh Ltd. · Upwork Top Rated Consultant · Linux Infrastructure Specialist',
-  bio: 'IT Manager at Japna Bangladesh Ltd. and Professional Upwork IT Consultant with 16+ years of expertise spanning IT operations, Linux server hardening, cloud infrastructure (Cloud Server Inc, AWS, GCP), Proxmox VE virtualization, web development, and enterprise networking.',
+  title: 'AI Agent Developer & Linux Infrastructure Engineer',
+  tagline: 'AI Agent Developer · IT Manager at Japna Bangladesh Ltd. · Upwork Top Rated Consultant · Linux Infrastructure Specialist',
+  bio: 'AI Agent Developer and IT Manager with 16+ years of expertise building autonomous AI agents, multi-agent workflows, LLM orchestration (LangChain, LlamaIndex, OpenAI, Claude, Gemini, MCP), Linux server hardening, cloud infrastructure (AWS, GCP), and enterprise DevOps automation.',
   email: 'shamim4s@gmail.com',
   location: 'Dhaka, Bangladesh (Available Globally / Remote)',
   availability: 'Available for IT management, freelance consulting, DevOps automation & server hardening',
@@ -75,6 +89,21 @@ export const SOCIAL_LINKS: SocialLink[] = [
 ];
 
 export const SKILL_CATEGORIES: SkillCategory[] = [
+  {
+    title: 'AI Agent Development & LLM Systems',
+    icon: 'Sparkles',
+    description: 'Autonomous AI agents, multi-agent swarms, Model Context Protocol (MCP), and LLM orchestration.',
+    skills: [
+      { name: 'Autonomous AI Agents (ReAct & Plan-and-Solve)', level: 96, experience: '3+ yrs', featured: true, tag: 'AI Core' },
+      { name: 'Multi-Agent Workflows & Orchestration', level: 94, experience: '3+ yrs', featured: true, tag: 'Architecture' },
+      { name: 'Tool Calling & Function Calling APIs', level: 95, experience: '3+ yrs', featured: true, tag: 'Integration' },
+      { name: 'Model Context Protocol (MCP) Servers', level: 92, experience: '2+ yrs', featured: true, tag: 'Protocol' },
+      { name: 'LangChain, LangGraph & LlamaIndex', level: 90, experience: '3+ yrs', featured: true, tag: 'Frameworks' },
+      { name: 'RAG Architecture & Vector Databases', level: 91, experience: '3+ yrs', featured: true, tag: 'RAG' },
+      { name: 'Gemini, Claude & OpenAI API Integration', level: 95, experience: '3+ yrs', featured: true, tag: 'LLMs' },
+      { name: 'Autonomous DevOps & Infra Troubleshooting', level: 94, experience: '3+ yrs', featured: true, tag: 'AI Ops' }
+    ]
+  },
   {
     title: 'Linux & System Administration',
     icon: 'Terminal',
@@ -154,6 +183,25 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
 ];
 
 export const EXPERIENCES: ExperienceItem[] = [
+  {
+    id: 'exp-ai-agents',
+    role: 'AI Agent Developer & Autonomous Systems Architect',
+    company: 'Upwork & Independent Client Engagements',
+    type: 'Freelance / Consultant',
+    location: 'Remote · Worldwide',
+    period: '2023 - Present',
+    current: true,
+    description: 'Engineering and deploying production autonomous AI agents, multi-agent collaborative workflows, Model Context Protocol (MCP) integrations, and LLM-powered enterprise automation.',
+    highlights: [
+      'Architecting autonomous multi-agent task execution swarms utilizing LangChain, LangGraph, and Plan-and-Solve patterns.',
+      'Building custom Model Context Protocol (MCP) servers and tools allowing LLMs to safely query Linux telemetry, inspect Docker containers, and trigger auto-remediation workflows.',
+      'Integrating OpenAI, Anthropic Claude, and Google Gemini APIs with high-reliability Tool Calling and Function Calling pipelines.',
+      'Constructing Retrieval-Augmented Generation (RAG) vector search pipelines over complex technical documentation and infrastructure logs.'
+    ],
+    techStack: ['AI Agents', 'Multi-Agent Workflows', 'LangChain', 'Model Context Protocol (MCP)', 'Tool Calling APIs', 'Python', 'Vector DBs', 'Gemini & Claude API'],
+    link: 'https://www.upwork.com/freelancers/~0126a9e3ea476741d8',
+    linkedinUrl: 'https://www.linkedin.com/in/shamim4s4/'
+  },
   {
     id: 'exp-japna',
     role: 'IT Manager',
@@ -319,6 +367,29 @@ export const EXPERIENCES: ExperienceItem[] = [
 ];
 
 export const PROJECTS: ProjectItem[] = [
+  {
+    id: 'proj-ai-agent-ops',
+    title: 'Autonomous AI DevOps & Infrastructure Agent',
+    slug: 'autonomous-ai-devops-agent',
+    category: 'AI & Automation',
+    description: 'Production-grade autonomous AI Agent platform engineering self-healing server diagnostics, log analysis, and multi-agent incident triage via Model Context Protocol (MCP).',
+    longDescription: 'An autonomous multi-agent operational platform designed to automate Linux server administration, Docker container diagnostics, and infrastructure self-healing. Integrates with LLMs (Claude, Gemini, OpenAI) via function calling and a custom sandboxed Model Context Protocol (MCP) server, enabling safe command inspection, root-cause log extraction, and automated remediation with human-in-the-loop safeguards.',
+    featured: true,
+    githubUrl: 'https://github.com/shamim4s',
+    demoUrl: 'https://shamim4s.github.io',
+    tags: ['AI Agents', 'LangChain', 'MCP', 'Tool Calling', 'Gemini & Claude', 'Docker', 'Linux', 'Python'],
+    architecture: ['Plan-and-Solve Multi-Agent Architecture', 'Sandboxed MCP Execution Environment', 'Vector Similarity Log Search', 'Human-in-the-Loop Approval Gates'],
+    keyFeatures: [
+      'Autonomous agent planning and sequential tool invocation for rapid server anomaly triage.',
+      'Custom Model Context Protocol (MCP) server integration for secure remote infrastructure telemetry.',
+      'Automated log ingestion, error clustering, and semantic summarization using LLMs.',
+      'Pre-execution safety checks and guardrails to prevent accidental destructive commands.'
+    ],
+    stats: [
+      { label: 'Incident Triage Time', value: '-75%' },
+      { label: 'Tool Calling Accuracy', value: '99.2%' }
+    ]
+  },
   {
     id: 'proj-1',
     title: 'Linux Production Guide & Low-Spec Optimization',

@@ -14,7 +14,9 @@ import {
   ShieldCheck,
   GitBranch,
   Cpu,
-  Layers
+  Layers,
+  Sparkles,
+  Bot
 } from 'lucide-react';
 
 interface SocialIconProps {
@@ -24,6 +26,12 @@ interface SocialIconProps {
 
 export const DynamicIcon: React.FC<SocialIconProps> = ({ name, className = 'w-5 h-5' }) => {
   switch (name.toLowerCase()) {
+    case 'sparkles':
+    case 'ai':
+    case 'agent':
+      return <Sparkles className={className} />;
+    case 'bot':
+      return <Bot className={className} />;
     case 'github':
       return <Github className={className} />;
     case 'linkedin':

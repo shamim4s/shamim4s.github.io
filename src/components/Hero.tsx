@@ -10,7 +10,9 @@ import {
   MapPin,
   CheckCircle,
   Briefcase,
-  CheckCircle2
+  CheckCircle2,
+  Sparkles,
+  Bot
 } from 'lucide-react';
 import { PERSONAL_INFO, SOCIAL_LINKS } from '../data/portfolioData';
 import { DynamicIcon } from './SocialIcons';
@@ -56,7 +58,7 @@ export const Hero: React.FC<HeroProps> = ({ onDownloadResume, onOpenDeploymentGu
             {/* Status Pill */}
             <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 text-xs font-semibold tracking-wide">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Available for Server Architecture & DevOps Consulting</span>
+              <span>Available for AI Agent Development & Cloud Infra Consulting</span>
             </div>
 
             {/* Name and Titles */}
@@ -83,16 +85,16 @@ export const Hero: React.FC<HeroProps> = ({ onDownloadResume, onOpenDeploymentGu
             {/* Quick Badges */}
             <div className="flex flex-wrap gap-2 pt-1 text-xs font-medium text-slate-700 dark:text-slate-300">
               <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60">
-                <Server className="w-3.5 h-3.5 text-emerald-500" />
+                <Sparkles className="w-3.5 h-3.5 text-emerald-500" />
+                <span>AI Agent Systems & MCP</span>
+              </div>
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60">
+                <Server className="w-3.5 h-3.5 text-teal-500" />
                 <span>150+ Servers Hardened</span>
               </div>
               <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60">
-                <Cloud className="w-3.5 h-3.5 text-teal-500" />
+                <Cloud className="w-3.5 h-3.5 text-cyan-500" />
                 <span>AWS & GCP Infrastructure</span>
-              </div>
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60">
-                <ShieldCheck className="w-3.5 h-3.5 text-cyan-500" />
-                <span>Zero-Trust & CIS Security</span>
               </div>
               <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60">
                 <MapPin className="w-3.5 h-3.5 text-amber-500" />

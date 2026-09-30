@@ -276,7 +276,7 @@ export const HomeSection: React.FC = () => {
 
         {/* Company & Role Tagline */}
         <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 mt-3 max-w-2xl mx-auto leading-relaxed">
-          IT Manager at <span className="font-semibold text-slate-900 dark:text-white">Japna Bangladesh Ltd.</span> · Professional Upwork IT Consultant with <span className="font-semibold text-emerald-600 dark:text-emerald-400">16+ years</span> in Enterprise Systems, Cloud Architecture & Linux Server Hardening.
+          <span className="font-semibold text-emerald-600 dark:text-emerald-400">AI Agent Developer</span> & IT Manager at <span className="font-semibold text-slate-900 dark:text-white">Japna Bangladesh Ltd.</span> · Professional Upwork IT Consultant with <span className="font-semibold text-emerald-600 dark:text-emerald-400">16+ years</span> in Autonomous Agents, LLM Systems, Cloud & Linux Server Hardening.
         </p>
 
         {/* Trust Badges */}
