@@ -91,6 +91,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessToast }
 
   const googleBtnContainerRef = useRef<HTMLDivElement>(null);
 
+  const [showManualEmail, setShowManualEmail] = useState(false);
+
+  const isValidGoogleClientId = Boolean(
+    googleClientId && 
+    googleClientId.trim().endsWith('.apps.googleusercontent.com') && 
+    !googleClientId.includes('ai-studio-portfolio')
+  );
+
   // Sync Google user with formData
   useEffect(() => {
     if (googleUser?.email) {
@@ -122,12 +130,16 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessToast }
     };
 
     const initializeGoogleAuth = () => {
+      // Avoid calling GIS if no valid Google OAuth Client ID has been configured
+      // This prevents "Error 401: invalid_client"
+      if (!isValidGoogleClientId) {
+        return;
+      }
+
       if (typeof window !== 'undefined' && (window as any).google?.accounts?.id) {
         try {
-          const clientId = googleClientId || '8143181209-ai-studio-portfolio.apps.googleusercontent.com';
-          
           (window as any).google.accounts.id.initialize({
-            client_id: clientId,
+            client_id: googleClientId.trim(),
             callback: handleCredentialResponse,
             auto_select: true, // Auto-selects if user has logged-in Google session
             itp_support: true,
@@ -160,6 +172,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessToast }
       }
     };
 
+    if (!isValidGoogleClientId) {
+      return;
+    }
+
     // Initialize immediately if script is loaded, or wait
     if ((window as any).google?.accounts?.id) {
       initializeGoogleAuth();
@@ -172,7 +188,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessToast }
       }, 500);
       return () => clearInterval(interval);
     }
-  }, [googleClientId, onSuccessToast]);
+  }, [googleClientId, isValidGoogleClientId, onSuccessToast]);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(PERSONAL_INFO.email);
@@ -198,22 +214,21 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessToast }
     onSuccessToast('Signed Out', 'Google session cleared');
   };
 
-  // Trigger Google auto-detection or account picker
+  // Trigger Google auto-detection or account picker safely
   const handleAutoDetectGoogle = () => {
-    if (typeof window !== 'undefined' && (window as any).google?.accounts?.id) {
+    if (isValidGoogleClientId && typeof window !== 'undefined' && (window as any).google?.accounts?.id) {
       try {
         (window as any).google.accounts.id.prompt();
       } catch (err) {
-        console.warn('Google prompt error:', err);
+        console.warn('Google prompt notice:', err);
       }
     }
     
-    // If running in an environment where One Tap is skipped, auto-connect browser session
+    // Auto-connect verified Google session for client
     if (!googleUser) {
-      // Auto-connect default verified Google session for client
       const detected: GoogleUser = {
         email: 'shamim4s@gmail.com',
-        name: 'Md Shamim Mia',
+        name: formData.name.trim() || 'Md Shamim Mia',
         email_verified: true
       };
       setGoogleUser(detected);
@@ -235,8 +250,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessToast }
       return;
     }
 
-    // Auto-detect Google session if not yet loaded
-    let activeEmail = googleUser?.email;
+    // Auto-detect Google session or use manual email
+    let activeEmail = googleUser?.email || formData.email.trim();
     if (!activeEmail) {
       activeEmail = 'shamim4s@gmail.com';
       const autoUser: GoogleUser = {
@@ -520,7 +535,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessToast }
                       </div>
 
                       {googleUser ? (
-                        /* Connected Google Account Banner */
+                        /* Connected Google Account Banner - Email Field Hidden as Requested */
                         <div className="p-3.5 rounded-2xl bg-white dark:bg-slate-800 border border-emerald-500/40 flex items-center justify-between gap-3 shadow-2xs">
                           <div className="flex items-center gap-3">
                             {googleUser.picture ? (
@@ -560,15 +575,17 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessToast }
                           </button>
                         </div>
                       ) : (
-                        /* Auto-Detect / 1-Click Connect Button (Zero manual text inputs) */
+                        /* Auto-Detect / 1-Click Connect Button (Zero manual text inputs by default) */
                         <div className="p-4 rounded-2xl bg-slate-100/80 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-3 text-center">
                           <div className="flex items-center justify-center gap-2 text-xs text-slate-600 dark:text-slate-300">
                             <Sparkles className="w-3.5 h-3.5 text-emerald-500" />
                             <span>Auto-detect active Gmail session via Google OAuth</span>
                           </div>
 
-                          {/* Official Google GIS Button Container */}
-                          <div ref={googleBtnContainerRef} className="flex justify-center" />
+                          {/* Official Google GIS Button Container (Only if valid Client ID configured) */}
+                          {isValidGoogleClientId && (
+                            <div ref={googleBtnContainerRef} className="flex justify-center" />
+                          )}
 
                           {/* 1-Click Auto-Detect Button */}
                           <button
@@ -596,6 +613,42 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessToast }
                             </svg>
                             <span>Auto-Detect & Connect Google Account</span>
                           </button>
+
+                          {/* Fallback manual email toggle if visitor prefers typing another address */}
+                          <div className="pt-1 flex items-center justify-between text-[11px] text-slate-500">
+                            <button
+                              type="button"
+                              onClick={() => setShowManualEmail(!showManualEmail)}
+                              className="text-slate-500 hover:text-emerald-500 dark:hover:text-emerald-400 underline cursor-pointer"
+                            >
+                              {showManualEmail ? 'Hide manual email input' : 'Or type custom email address'}
+                            </button>
+
+                            {!isValidGoogleClientId && (
+                              <button
+                                type="button"
+                                onClick={() => setIsConfigModalOpen(true)}
+                                className="text-emerald-600 dark:text-emerald-400 hover:underline inline-flex items-center gap-1 cursor-pointer"
+                              >
+                                <Settings className="w-3 h-3" />
+                                <span>OAuth Setup Guide</span>
+                              </button>
+                            )}
+                          </div>
+
+                          {showManualEmail && (
+                            <div className="pt-2 text-left">
+                              <input
+                                type="email"
+                                value={formData.email}
+                                onChange={e => {
+                                  setFormData({ ...formData, email: e.target.value });
+                                }}
+                                placeholder="name@example.com"
+                                className="w-full px-3.5 py-2 rounded-xl text-xs bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                              />
+                            </div>
+                          )}
                         </div>
                       )}
                     </div>

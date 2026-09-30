@@ -460,7 +460,7 @@ export const AppsScriptConfigModal: React.FC<AppsScriptConfigModalProps> = ({
                 <div className="mt-4 p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-900 dark:text-amber-200">
                   <div className="flex items-center gap-2 font-bold text-xs mb-1 text-amber-800 dark:text-amber-300">
                     <AlertCircle className="w-4 h-4 text-amber-500 shrink-0" />
-                    <span>Seeing "This app is blocked" Error?</span>
+                    <span>Seeing "This app is blocked" Error in Apps Script?</span>
                   </div>
                   <p className="text-[11px] leading-relaxed mb-2">
                     Google blocks personal scripts that use <code className="font-mono text-amber-700 dark:text-amber-300">GmailApp</code> because it requests full access to read and delete your personal inbox. We have updated <code className="font-mono text-amber-700 dark:text-amber-300">Code.gs</code> to use <code className="font-mono text-emerald-600 dark:text-emerald-400 font-bold">MailApp</code> instead!
@@ -471,6 +471,46 @@ export const AppsScriptConfigModal: React.FC<AppsScriptConfigModalProps> = ({
                     <li>Click <strong>Deploy → Manage deployments → Edit (pencil icon) → Version: New version → Deploy</strong>.</li>
                     <li>Click <strong>Authorize access</strong>. Google will now show the standard warning where you can click <strong>Advanced → Go to project (unsafe) → Allow</strong> without being blocked!</li>
                   </ol>
+                </div>
+
+                {/* Guide for Error 401: invalid_client & Domain Origin Setup */}
+                <div className="mt-4 p-4 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-950 dark:text-cyan-200 space-y-2.5">
+                  <div className="flex items-center gap-2 font-bold text-xs text-cyan-800 dark:text-cyan-300">
+                    <ShieldCheck className="w-4 h-4 text-cyan-500 shrink-0" />
+                    <span>Fixing "Error 401: invalid_client" & Adding shamim4s.github.io to Google Cloud</span>
+                  </div>
+                  
+                  <p className="text-[11px] leading-relaxed text-slate-700 dark:text-slate-300">
+                    <strong>Why Error 401 occurred:</strong> Google gives <code>401: invalid_client (flowName=GeneralOAuthFlow)</code> when an OAuth Client ID is missing, incomplete, or rejected by Google Cloud Console.
+                  </p>
+
+                  <div className="text-[11px] space-y-2 text-slate-700 dark:text-slate-300">
+                    <div className="p-2.5 rounded-lg bg-white/60 dark:bg-slate-900/60 border border-cyan-500/20">
+                      <strong className="text-cyan-900 dark:text-cyan-300 block mb-1">Step A: Add Domain to OAuth Consent Screen</strong>
+                      <ol className="list-decimal list-inside space-y-1">
+                        <li>Go to <a href="https://console.cloud.google.com/apis/credentials/consent" target="_blank" rel="noreferrer" className="text-cyan-600 dark:text-cyan-400 underline font-semibold">Google Cloud Console → OAuth consent screen</a>.</li>
+                        <li>Under <strong>Authorized domains</strong>, click <strong>+ ADD DOMAIN</strong> and enter: <code className="font-bold text-emerald-600 dark:text-emerald-400">github.io</code> <em>(Note: Do not type https:// or path, Google requires the top domain)</em>.</li>
+                        <li>Set Application home page to: <code className="font-mono text-slate-800 dark:text-slate-200">https://shamim4s.github.io</code></li>
+                        <li>Click <strong>Save and Continue</strong>.</li>
+                      </ol>
+                    </div>
+
+                    <div className="p-2.5 rounded-lg bg-white/60 dark:bg-slate-900/60 border border-cyan-500/20">
+                      <strong className="text-cyan-900 dark:text-cyan-300 block mb-1">Step B: Create / Edit OAuth 2.0 Web Client ID</strong>
+                      <ol className="list-decimal list-inside space-y-1">
+                        <li>Go to <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noreferrer" className="text-cyan-600 dark:text-cyan-400 underline font-semibold">Google Cloud Console → Credentials</a>.</li>
+                        <li>Click <strong>+ CREATE CREDENTIALS</strong> → <strong>OAuth client ID</strong>.</li>
+                        <li>Application type: Choose <strong>Web application</strong>.</li>
+                        <li>Name: <code className="font-mono">Shamim Portfolio Web Client</code></li>
+                        <li>Under <strong>Authorized JavaScript origins</strong>, click <strong>+ ADD URI</strong> and enter: <code className="font-bold text-emerald-600 dark:text-emerald-400">https://shamim4s.github.io</code></li>
+                        <li>Click <strong>Create</strong>, then copy your generated <strong>Client ID</strong> (ends in <code>.apps.googleusercontent.com</code>) and paste it into the <strong>Connection & Keys</strong> tab in this dialog!</li>
+                      </ol>
+                    </div>
+
+                    <div className="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-900 dark:text-emerald-300 text-[11px]">
+                      💡 <strong>Note:</strong> Google Apps Script Web App works <strong>without</strong> an OAuth Client ID! As long as you have pasted your Web App URL, any visitor can send messages to your inbox immediately.
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
