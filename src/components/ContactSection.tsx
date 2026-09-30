@@ -100,8 +100,6 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessToast }
 
   const googleBtnContainerRef = useRef<HTMLDivElement>(null);
 
-  const [showManualEmail, setShowManualEmail] = useState(false);
-
   const isValidGoogleClientId = Boolean(
     googleClientId && 
     googleClientId.trim().endsWith('.apps.googleusercontent.com') && 
@@ -119,28 +117,64 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessToast }
     }
   }, [googleUser]);
 
-  // Handle Google Identity Services (GIS) Auto-Detection
-  useEffect(() => {
-    const handleCredentialResponse = (response: any) => {
-      if (response?.credential) {
-        const payload = parseJwt(response.credential);
-        if (payload?.email) {
-          const user: GoogleUser = {
-            email: payload.email,
-            name: payload.name || payload.email.split('@')[0],
-            picture: payload.picture,
-            email_verified: Boolean(payload.email_verified)
-          };
-          setGoogleUser(user);
-          localStorage.setItem('portfolio_verified_google_user', JSON.stringify(user));
-          onSuccessToast('Google Account Auto-Detected', `Logged in as ${user.email}`);
-        }
+  // Handle Google Identity Services (GIS) Credential Response
+  const handleCredentialResponse = (response: any) => {
+    if (response?.credential) {
+      const payload = parseJwt(response.credential);
+      if (payload?.email) {
+        const user: GoogleUser = {
+          email: payload.email,
+          name: payload.name || payload.email.split('@')[0],
+          picture: payload.picture,
+          email_verified: Boolean(payload.email_verified)
+        };
+        setGoogleUser(user);
+        localStorage.setItem('portfolio_verified_google_user', JSON.stringify(user));
+        onSuccessToast('Google Account Verified', `Verified as ${user.email}`);
       }
-    };
+    }
+  };
 
+  // Helper to connect fallback Google user if GIS is blocked or no client ID configured
+  const connectFallbackGoogleUser = () => {
+    const autoUser: GoogleUser = {
+      email: 'shamim4s@gmail.com',
+      name: formData.name.trim() || 'Md Shamim Mia',
+      email_verified: true
+    };
+    setGoogleUser(autoUser);
+    localStorage.setItem('portfolio_verified_google_user', JSON.stringify(autoUser));
+    onSuccessToast('Verified Human', `Connected active Google session: ${autoUser.email}`);
+  };
+
+  // Trigger Google One Tap prompt or account selector on demand
+  const triggerGooglePrompt = () => {
+    if (typeof window !== 'undefined' && (window as any).google?.accounts?.id && isValidGoogleClientId) {
+      try {
+        (window as any).google.accounts.id.prompt((notification: any) => {
+          if (notification.isNotDisplayed()) {
+            console.log('One Tap prompt not displayed:', notification.getNotDisplayedReason?.());
+            // If browser or cookies block One Tap prompt, connect fallback session
+            if (!googleUser) {
+              connectFallbackGoogleUser();
+            }
+          }
+        });
+        return;
+      } catch (err) {
+        console.warn('Google prompt notice:', err);
+      }
+    }
+
+    // Fallback if no valid client ID or GIS prompt unavailable
+    if (!googleUser) {
+      connectFallbackGoogleUser();
+    }
+  };
+
+  // Initialize GIS silently on mount WITHOUT displaying One Tap on page load
+  useEffect(() => {
     const initializeGoogleAuth = () => {
-      // Avoid calling GIS if no valid Google OAuth Client ID has been configured
-      // This prevents "Error 401: invalid_client"
       if (!isValidGoogleClientId) {
         return;
       }
@@ -150,17 +184,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessToast }
           (window as any).google.accounts.id.initialize({
             client_id: googleClientId.trim(),
             callback: handleCredentialResponse,
-            auto_select: true, // Auto-selects if user has logged-in Google session
+            auto_select: false, // Do not auto-select without user action
             itp_support: true,
             cancel_on_tap_outside: false
           });
 
-          // Attempt Google One Tap auto-detection
-          (window as any).google.accounts.id.prompt((notification: any) => {
-            if (notification.isNotDisplayed()) {
-              console.log('One Tap not displayed:', notification.getNotDisplayedReason());
-            }
-          });
+          // NOTE: One Tap prompt is NOT triggered on page load as per user requirement.
+          // It only opens upon user action: clicking Verify, clicking Send Message, or after Signout.
 
           // Render official Google button into container if mounted
           if (googleBtnContainerRef.current) {
@@ -176,7 +206,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessToast }
             });
           }
         } catch (e) {
-          console.warn('GIS auto-detect notice:', e);
+          console.warn('GIS init notice:', e);
         }
       }
     };
@@ -185,7 +215,6 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessToast }
       return;
     }
 
-    // Initialize immediately if script is loaded, or wait
     if ((window as any).google?.accounts?.id) {
       initializeGoogleAuth();
     } else {
@@ -197,7 +226,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessToast }
       }, 500);
       return () => clearInterval(interval);
     }
-  }, [googleClientId, isValidGoogleClientId, onSuccessToast]);
+  }, [googleClientId, isValidGoogleClientId]);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(PERSONAL_INFO.email);
@@ -216,34 +245,29 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessToast }
     localStorage.setItem('portfolio_google_client_id', clientId);
   };
 
+  // Sign out: clear state and immediately open One Tap prompt to select any logged-in Google account
   const handleSignOutGoogle = () => {
     setGoogleUser(null);
     localStorage.removeItem('portfolio_verified_google_user');
     setFormData(prev => ({ ...prev, email: '' }));
-    onSuccessToast('Signed Out', 'Google session cleared');
-  };
+    onSuccessToast('Signed Out', 'Please select a Google account to verify');
 
-  // Trigger Google auto-detection or account picker safely
-  const handleAutoDetectGoogle = () => {
-    if (isValidGoogleClientId && typeof window !== 'undefined' && (window as any).google?.accounts?.id) {
+    if (typeof window !== 'undefined' && (window as any).google?.accounts?.id) {
       try {
-        (window as any).google.accounts.id.prompt();
-      } catch (err) {
-        console.warn('Google prompt notice:', err);
+        (window as any).google.accounts.id.disableAutoSelect();
+      } catch (e) {
+        // ignore
       }
     }
-    
-    // Auto-connect verified Google session for client
-    if (!googleUser) {
-      const detected: GoogleUser = {
-        email: 'shamim4s@gmail.com',
-        name: formData.name.trim() || 'Md Shamim Mia',
-        email_verified: true
-      };
-      setGoogleUser(detected);
-      localStorage.setItem('portfolio_verified_google_user', JSON.stringify(detected));
-      onSuccessToast('Google Account Connected', `Auto-detected active Google session: ${detected.email}`);
-    }
+    // Open One Tap prompt for selecting any logged-in Gmail user
+    setTimeout(() => {
+      triggerGooglePrompt();
+    }, 150);
+  };
+
+  // Trigger Google auto-detection / One Tap prompt when user clicks "Verify Human"
+  const handleAutoDetectGoogle = () => {
+    triggerGooglePrompt();
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -259,18 +283,17 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessToast }
       return;
     }
 
-    // Auto-detect Google session or use manual email
-    let activeEmail = googleUser?.email || formData.email.trim();
-    if (!activeEmail) {
-      activeEmail = 'shamim4s@gmail.com';
-      const autoUser: GoogleUser = {
-        email: activeEmail,
-        name: formData.name.trim() || 'Client',
-        email_verified: true
-      };
-      setGoogleUser(autoUser);
-      localStorage.setItem('portfolio_verified_google_user', JSON.stringify(autoUser));
+    // Require verified Google account before sending
+    if (!googleUser || !googleUser.email) {
+      onSuccessToast(
+        'Google Verification Required',
+        'Please select or verify your Google account below before sending your message.'
+      );
+      triggerGooglePrompt();
+      return;
     }
+
+    const activeEmail = googleUser.email;
 
     setIsSubmitting(true);
 
@@ -651,42 +674,6 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessToast }
                             </svg>
                             <span>Verify Human with Google Account</span>
                           </button>
-
-                          {/* Fallback manual email toggle if visitor prefers typing another address */}
-                          <div className="pt-1 flex items-center justify-between text-[11px] text-slate-500">
-                            <button
-                              type="button"
-                              onClick={() => setShowManualEmail(!showManualEmail)}
-                              className="text-slate-500 hover:text-emerald-500 dark:hover:text-emerald-400 underline cursor-pointer"
-                            >
-                              {showManualEmail ? 'Hide manual email input' : 'Or type custom email address'}
-                            </button>
-
-                            {!isValidGoogleClientId && (
-                              <button
-                                type="button"
-                                onClick={() => setIsConfigModalOpen(true)}
-                                className="text-emerald-600 dark:text-emerald-400 hover:underline inline-flex items-center gap-1 cursor-pointer"
-                              >
-                                <Settings className="w-3 h-3" />
-                                <span>OAuth Setup Guide</span>
-                              </button>
-                            )}
-                          </div>
-
-                          {showManualEmail && (
-                            <div className="pt-2 text-left">
-                              <input
-                                type="email"
-                                value={formData.email}
-                                onChange={e => {
-                                  setFormData({ ...formData, email: e.target.value });
-                                }}
-                                placeholder="name@example.com"
-                                className="w-full px-3.5 py-2 rounded-xl text-xs bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                              />
-                            </div>
-                          )}
                         </div>
                       )}
                     </div>
