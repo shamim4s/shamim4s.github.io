@@ -33,6 +33,10 @@ export default function App() {
   useEffect(() => {
     // Initialize SEO meta tags and Open Graph protocol tags
     updatePageSEO();
+    // Ensure viewport starts at the top (Home section)
+    if (!window.location.hash || window.location.hash === '#home') {
+      window.scrollTo(0, 0);
+    }
   }, []);
 
   useEffect(() => {

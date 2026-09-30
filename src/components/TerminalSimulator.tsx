@@ -30,10 +30,19 @@ export const TerminalSimulator: React.FC = () => {
     }
   ]);
   const [copied, setCopied] = useState(false);
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const terminalBodyRef = useRef<HTMLDivElement>(null);
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    // Prevent scrolling on initial page load
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    // Only scroll the terminal's internal container, NEVER the window
+    if (terminalBodyRef.current) {
+      terminalBodyRef.current.scrollTop = terminalBodyRef.current.scrollHeight;
+    }
   }, [history]);
 
   const handleCommand = (e: React.FormEvent) => {
@@ -193,7 +202,7 @@ export const TerminalSimulator: React.FC = () => {
       </div>
 
       {/* Terminal Body */}
-      <div className="p-4 sm:p-5 max-h-[380px] overflow-y-auto space-y-4 text-slate-200">
+      <div ref={terminalBodyRef} className="p-4 sm:p-5 max-h-[380px] overflow-y-auto space-y-4 text-slate-200">
         {history.map((item, index) => (
           <div key={index} className="space-y-2">
             <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold">
@@ -219,8 +228,6 @@ export const TerminalSimulator: React.FC = () => {
             spellCheck="false"
           />
         </form>
-
-        <div ref={bottomRef} />
       </div>
 
       {/* Interactive Quick Chip Bar */}
