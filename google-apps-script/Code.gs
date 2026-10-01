@@ -164,7 +164,7 @@ QUICK ACTIONS:
     // 2. Send Polite Auto-Confirmation to Client
     // =========================================================================
     try {
-      const clientSubject = `Inquiry Received - Md Shamim Mia (Linux Infrastructure Engineer)`;
+      const clientSubject = `Inquiry Received - Md Shamim Mia (Cloud Infrastructure Engineer)`;
       const clientBody = 
 `Hi ${name},
 
@@ -177,7 +177,7 @@ ${CONFIG.UPWORK_URL}
 
 Best regards,
 Md Shamim Mia
-Linux Infrastructure Engineer & IT Consultant
+AI Agent Developer & Cloud Infrastructure Engineer & IT Consultant
 Dhaka, Bangladesh · shamim4s@gmail.com`;
 
       MailApp.sendEmail({

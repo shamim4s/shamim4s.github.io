@@ -19,7 +19,7 @@ export const TerminalSimulator: React.FC = () => {
           <div><span className="text-teal-400 font-semibold">OS:</span> Ubuntu 24.04.1 LTS x86_64 / Proxmox PVE</div>
           <div><span className="text-teal-400 font-semibold">Host:</span> Dell PowerEdge / AWS Cloud Instance</div>
           <div><span className="text-teal-400 font-semibold">Kernel:</span> 6.8.0-45-generic (Hardened)</div>
-          <div><span className="text-teal-400 font-semibold">Role:</span> Linux Infrastructure Engineer & IT Consultant</div>
+          <div><span className="text-teal-400 font-semibold">Role:</span> AI Agent Developer & Cloud Infrastructure Engineer & IT Consultant</div>
           <div><span className="text-teal-400 font-semibold">Uptime:</span> 1,280 days, 14 hours (99.99% SLA)</div>
           <div><span className="text-teal-400 font-semibold">Packages:</span> 1,420 (dpkg), 18 (docker), 4 (snap)</div>
           <div><span className="text-teal-400 font-semibold">Shell:</span> bash 5.2.21</div>

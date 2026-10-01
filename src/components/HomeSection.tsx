@@ -338,9 +338,9 @@ export const HomeSection: React.FC = () => {
         {/* Scroll Down Prompt */}
         <div className="mt-14 flex justify-center">
           <a
-            href="#about"
+            href="#experience"
             className="inline-flex flex-col items-center gap-1 text-xs font-mono text-slate-400 hover:text-emerald-500 transition-colors animate-bounce"
-            title="Scroll to About & Background"
+            title="Scroll to Professional Experience"
           >
             <span>Explore Portfolio</span>
             <ChevronDown className="w-4 h-4" />

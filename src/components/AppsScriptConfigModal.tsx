@@ -80,13 +80,13 @@ function doPost(e) {
 
     // 2. Send polite confirmation to client
     try {
-      const clientSubject = "Inquiry Received - Md Shamim Mia (Linux Infrastructure Engineer)";
+      const clientSubject = "Inquiry Received - Md Shamim Mia (Cloud Infrastructure Engineer)";
       const clientBody = 
         "Hi " + name + ",\\n\\n" +
         "Thank you for reaching out through my portfolio website regarding \\"" + projectType + "\\".\\n\\n" +
         "I have received your message and will review the details promptly. You can expect a response within 6 to 12 hours.\\n\\n" +
         "Upwork Profile: " + CONFIG.UPWORK_URL + "\\n\\n" +
-        "Best regards,\\nMd Shamim Mia\\nLinux Infrastructure Engineer & IT Consultant";
+        "Best regards,\\nMd Shamim Mia\\nAI Agent Developer & Cloud Infrastructure Engineer & IT Consultant";
 
       MailApp.sendEmail({
         to: email,

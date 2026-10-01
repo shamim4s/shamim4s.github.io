@@ -86,37 +86,37 @@ export default function App() {
 
       {/* Main Content Sections */}
       <main className="flex-1">
-        {/* Home / Tactical AI Assistant Section with Three.js Face Particle Cloud */}
+        {/* 1. Home Section */}
         <HomeSection />
 
-        {/* About / Executive Bio Section */}
+        {/* 2. Professional Experience & Career Track Record */}
+        <ExperienceSection />
+
+        {/* 3. Customer Reviews & Upwork Client Satisfaction */}
+        <ReviewsSection />
+
+        {/* 4. Technical Skills */}
+        <SkillsSection />
+
+        {/* 5. Technical Projects */}
+        <ProjectsSection />
+
+        {/* 6. About / Executive Bio Section */}
         <Hero 
           onDownloadResume={handleDownloadResume} 
           onOpenDeploymentGuide={() => setDeploymentGuideOpen(true)}
         />
 
-        {/* Technical Skills */}
-        <SkillsSection />
-
-        {/* Professional Experience & Career Track Record */}
-        <ExperienceSection />
-
-        {/* Customer Reviews & Upwork Client Satisfaction */}
-        <ReviewsSection />
-
-        {/* Technical Projects */}
-        <ProjectsSection />
-
-        {/* Qualifications & Resume */}
+        {/* 7. Qualifications & Resume */}
         <ResumeSection
           onDownloadResume={handleDownloadResume}
           onCopySuccess={handleCopySuccess}
         />
 
-        {/* Technical Blog */}
+        {/* 8. Technical Blog */}
         <BlogSection onCopySuccess={handleCopySuccess} />
 
-        {/* Direct Contact */}
+        {/* 9. Direct Contact */}
         <ContactSection
           onSuccessToast={(title, msg) => addToast('success', title, msg)}
         />

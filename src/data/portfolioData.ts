@@ -19,8 +19,8 @@ export const PERSONAL_INFO = {
   handle: 'shamim4s',
   avatarUrl: 'https://github.com/shamim4s.png',
   fallbackAvatarUrl: 'https://avatars.githubusercontent.com/u/85999549?v=4',
-  title: 'AI Agent Developer & Linux Infrastructure Engineer',
-  tagline: 'AI Agent Developer · IT Manager at Japna Bangladesh Ltd. · Upwork Top Rated Consultant · Linux Infrastructure Specialist',
+  title: 'AI Agent Developer & Cloud Infrastructure Engineer',
+  tagline: 'AI Agent Developer · IT Manager at Japna Bangladesh Ltd. · Upwork Top Rated Consultant · Cloud Infrastructure Specialist',
   bio: 'AI Agent Developer and IT Manager with 16+ years of expertise building autonomous AI agents, multi-agent workflows, LLM orchestration (LangChain, LlamaIndex, OpenAI, Claude, Gemini, MCP), Linux server hardening, cloud infrastructure (AWS, GCP), and enterprise DevOps automation.',
   email: 'shamim4s@gmail.com',
   location: 'Dhaka, Bangladesh (Available Globally / Remote)',
@@ -848,13 +848,13 @@ This saves valuable on-call minutes during outages and turns raw telemetry into 
 
 export const RESUME_DATA = {
   name: 'Md Shamim Mia',
-  role: 'Linux Infrastructure Engineer & IT Consultant',
+  role: 'AI Agent Developer & Cloud Infrastructure Engineer & IT Consultant',
   email: 'shamim4s@gmail.com',
   location: 'Bangladesh (Available Globally / Remote)',
   github: 'https://github.com/shamim4s',
   linkedin: 'https://www.linkedin.com/in/shamim4s4/',
   website: 'https://shamim4s.github.io',
-  summary: 'Results-driven Linux Infrastructure Engineer and IT Consultant with 6+ years of expertise designing, hardening, and automating high-availability server platforms. Proven track record auditing 150+ production servers, containerizing complex web applications with Docker, implementing zero-trust security postures, and optimizing cloud architectures across AWS, GCP, and Proxmox VE environments.',
+  summary: 'Results-driven AI Agent Developer, Cloud Infrastructure Engineer and IT Consultant with 16+ years of expertise building autonomous AI agents, multi-agent workflows, designing, hardening, and automating high-availability server platforms. Proven track record auditing 150+ production servers, containerizing complex web applications with Docker, implementing zero-trust security postures, and optimizing cloud architectures across AWS, GCP, and Proxmox VE environments.',
   skills: {
     operatingSystems: ['Ubuntu', 'Debian', 'Red Hat Enterprise Linux (RHEL)', 'AlmaLinux', 'Rocky Linux', 'Alpine Linux'],
     cloudAndVirtualization: ['AWS (EC2, S3, RDS, VPC, Route53, IAM)', 'Google Cloud Platform (GCP)', 'Proxmox VE', 'KVM', 'VMware ESXi'],

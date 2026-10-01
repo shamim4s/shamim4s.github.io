@@ -13,11 +13,11 @@ interface NavbarProps {
 
 const NAV_ITEMS = [
   { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Skills', href: '#skills' },
   { label: 'Experience', href: '#experience' },
   { label: 'Reviews', href: '#reviews' },
+  { label: 'Skills', href: '#skills' },
   { label: 'Projects', href: '#projects' },
+  { label: 'About', href: '#about' },
   { label: 'Resume', href: '#resume' },
   { label: 'Blog', href: '#blog' },
   { label: 'Contact', href: '#contact' },

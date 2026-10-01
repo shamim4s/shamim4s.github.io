@@ -1,4 +1,4 @@
-# Md Shamim Mia — AI Agent Developer & Linux Infrastructure Engineer Portfolio
+# Md Shamim Mia — AI Agent Developer & Cloud Infrastructure Engineer Portfolio
 
 [![Deploy to GitHub Pages](https://github.com/shamim4s/shamim4s.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/shamim4s/shamim4s.github.io/actions/workflows/deploy.yml)
 [![Live Site](https://img.shields.io/badge/Live%20Site-shamim4s.github.io-emerald)](https://shamim4s.github.io)

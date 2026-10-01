@@ -25,7 +25,7 @@ export const Footer: React.FC = () => {
               </span>
             </div>
             <p className="text-xs text-slate-400 max-w-sm leading-relaxed">
-              {PERSONAL_INFO.name} — Linux Infrastructure Engineer & IT Consultant specializing in secure cloud deployments, server hardening, and DevOps workflows.
+              {PERSONAL_INFO.name} — AI Agent Developer & Cloud Infrastructure Engineer & IT Consultant specializing in secure cloud deployments, server hardening, and DevOps workflows.
             </p>
             <div className="text-xs font-mono text-emerald-400/90 pt-1 flex items-center gap-1.5">
               <ShieldCheck className="w-4 h-4 text-emerald-500" />
@@ -40,11 +40,11 @@ export const Footer: React.FC = () => {
             </span>
             <ul className="space-y-2 text-xs">
               <li><a href="#home" className="hover:text-emerald-400 transition-colors">Home (Tactical AI)</a></li>
-              <li><a href="#about" className="hover:text-emerald-400 transition-colors">About & Profile</a></li>
-              <li><a href="#skills" className="hover:text-emerald-400 transition-colors">Technical Stack</a></li>
               <li><a href="#experience" className="hover:text-emerald-400 transition-colors">Work Experience</a></li>
               <li><a href="#reviews" className="hover:text-emerald-400 transition-colors">Customer Reviews (5.0★)</a></li>
+              <li><a href="#skills" className="hover:text-emerald-400 transition-colors">Technical Stack</a></li>
               <li><a href="#projects" className="hover:text-emerald-400 transition-colors">Open Source Projects</a></li>
+              <li><a href="#about" className="hover:text-emerald-400 transition-colors">About & Profile</a></li>
               <li><a href="#resume" className="hover:text-emerald-400 transition-colors">Resume & Certifications</a></li>
               <li><a href="#blog" className="hover:text-emerald-400 transition-colors">Engineering Blog</a></li>
               <li><a href="#contact" className="hover:text-emerald-400 transition-colors">Contact Form</a></li>

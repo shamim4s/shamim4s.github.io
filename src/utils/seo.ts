@@ -14,8 +14,8 @@ export interface MetaTagOptions {
 }
 
 const DEFAULT_META: Required<MetaTagOptions> = {
-  title: 'Md Shamim Mia - Linux Infrastructure Engineer & Portfolio',
-  description: 'Professional portfolio, technical projects, resume, and engineering blog of Md Shamim Mia (shamim4s) - Linux Infrastructure Engineer, DevOps Specialist, and IT Consultant.',
+  title: 'Md Shamim Mia - AI Agent Developer & Cloud Infrastructure Engineer',
+  description: 'Professional portfolio, technical projects, resume, and engineering blog of Md Shamim Mia (shamim4s) - AI Agent Developer, Cloud Infrastructure Engineer, and IT Consultant.',
   canonicalUrl: 'https://shamim4s.github.io',
   ogType: 'website',
   imageUrl: 'https://avatars.githubusercontent.com/shamim4s',
@@ -24,7 +24,8 @@ const DEFAULT_META: Required<MetaTagOptions> = {
   keywords: [
     'Md Shamim Mia',
     'shamim4s',
-    'Linux Engineer',
+    'AI Agent Developer',
+    'Cloud Infrastructure Engineer',
     'Cloud Architect',
     'DevOps',
     'Server Hardening',
