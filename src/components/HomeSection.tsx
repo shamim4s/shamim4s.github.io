@@ -278,7 +278,7 @@ export const HomeSection: React.FC = () => {
         {/* Company & Role Tagline */}
         <div className="mt-4 max-w-5xl mx-auto">
           <p className="text-sm sm:text-base md:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
-            <span className="font-semibold text-emerald-600 dark:text-emerald-400">AI Agent Developer & IT Manager & Twilio Expert</span> at{' '}
+            <span className="font-semibold text-emerald-600 dark:text-emerald-400">IT Manager & Twilio Expert</span> at{' '}
             <a
               href="https://www.drakedigital.com/about/"
               target="_blank"

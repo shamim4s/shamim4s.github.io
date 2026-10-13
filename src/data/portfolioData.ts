@@ -204,7 +204,7 @@ export const EXPERIENCES: ExperienceItem[] = [
   },
   {
     id: 'exp-drake-digital',
-    role: 'AI Agent Developer & IT Manager & Twilio Expert',
+    role: 'IT Manager & Twilio Expert',
     company: 'Drake Digital Marketing Agency, Toronto, Canada',
     type: 'Full-Time',
     location: 'Toronto, Canada (Remote)',
