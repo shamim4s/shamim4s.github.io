@@ -128,7 +128,7 @@ export const triggerResumeDownload = () => {
         <span>${e.role}</span>
         <span>${e.period}</span>
       </div>
-      <div class="exp-company">${e.company} • ${e.location}</div>
+      <div class="exp-company">${e.link ? `<a href="${e.link}" target="_blank" style="color: #059669; text-decoration: underline;">${e.company}</a>` : e.company} • ${e.location}</div>
       <p style="font-size: 9.5pt; margin-bottom: 4px;">${e.description}</p>
       <ul>
         ${e.highlights.map(h => `<li>${h}</li>`).join('')}

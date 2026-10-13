@@ -276,7 +276,17 @@ export const HomeSection: React.FC = () => {
 
         {/* Company & Role Tagline */}
         <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 mt-3 max-w-2xl mx-auto leading-relaxed">
-          <span className="font-semibold text-emerald-600 dark:text-emerald-400">AI Agent Developer</span> & IT Manager at <span className="font-semibold text-slate-900 dark:text-white">Japna Bangladesh Ltd.</span> · Professional Upwork IT Consultant with <span className="font-semibold text-emerald-600 dark:text-emerald-400">16+ years</span> in Autonomous Agents, LLM Systems, Cloud & Linux Server Hardening.
+          <span className="font-semibold text-emerald-600 dark:text-emerald-400">AI Agent Developer & IT Manager & Twilio Expert</span> at{' '}
+          <a
+            href="https://www.drakedigital.com/about/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-slate-900 dark:text-white underline decoration-emerald-500/60 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors inline-flex items-center gap-1 group"
+          >
+            <span>Drake Digital Marketing Agency, Toronto, Canada</span>
+            <ExternalLink className="w-3.5 h-3.5 inline text-emerald-500 shrink-0 group-hover:translate-x-0.5 transition-transform" />
+          </a>{' '}
+          · Professional Upwork IT Consultant with <span className="font-semibold text-emerald-600 dark:text-emerald-400">16+ years</span> in Autonomous Agents, LLM Systems, Cloud & Linux Server Hardening.
         </p>
 
         {/* Trust Badges */}

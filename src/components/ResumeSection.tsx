@@ -239,7 +239,23 @@ ${RESUME_DATA.education.map(ed => `- ${ed.degree} (${ed.period})`).join('\n')}
                       <span className="font-bold text-slate-900 dark:text-white">{exp.role}</span>
                       <span className="text-xs font-mono text-slate-500">{exp.period}</span>
                     </div>
-                    <div className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">{exp.company} • {exp.location}</div>
+                    <div className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+                      {exp.link ? (
+                        <a
+                          href={exp.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:underline hover:text-emerald-500 inline-flex items-center gap-1 transition-colors"
+                          title={`Visit ${exp.company}`}
+                        >
+                          <span>{exp.company}</span>
+                          <ExternalLink className="w-3 h-3 text-emerald-500" />
+                        </a>
+                      ) : (
+                        <span>{exp.company}</span>
+                      )}{' '}
+                      • {exp.location}
+                    </div>
                     <p className="text-xs text-slate-600 dark:text-slate-300">{exp.description}</p>
                   </div>
                 ))}

@@ -20,11 +20,11 @@ export const PERSONAL_INFO = {
   avatarUrl: 'https://github.com/shamim4s.png',
   fallbackAvatarUrl: 'https://avatars.githubusercontent.com/u/85999549?v=4',
   title: 'AI Agent Developer & Cloud Infrastructure Engineer',
-  tagline: 'AI Agent Developer · IT Manager at Japna Bangladesh Ltd. · Upwork Top Rated Consultant · Cloud Infrastructure Specialist',
-  bio: 'AI Agent Developer and IT Manager with 16+ years of expertise building autonomous AI agents, multi-agent workflows, LLM orchestration (LangChain, LlamaIndex, OpenAI, Claude, Gemini, MCP), Linux server hardening, cloud infrastructure (AWS, GCP), and enterprise DevOps automation.',
+  tagline: 'AI Agent Developer · IT Manager & Twilio Expert at Drake Digital Marketing Agency, Toronto, Canada · Upwork Top Rated Consultant · Cloud Infrastructure Specialist',
+  bio: 'AI Agent Developer, IT Manager & Twilio Expert with 16+ years of expertise building autonomous AI agents, multi-agent workflows, Twilio telecommunication APIs (Voice, SMS, Studio, WhatsApp), LLM orchestration (LangChain, LlamaIndex, OpenAI, Claude, Gemini, MCP), Linux server hardening, cloud infrastructure (AWS, GCP), and enterprise DevOps automation.',
   email: 'shamim4s@gmail.com',
   location: 'Dhaka, Bangladesh (Available Globally / Remote)',
-  availability: 'Available for IT management, freelance consulting, DevOps automation & server hardening',
+  availability: 'Available for AI agent development, IT management, Twilio automation & cloud consulting',
   githubUrl: 'https://github.com/shamim4s',
   website: 'https://shamim4s.github.io',
   upworkUrl: 'https://www.upwork.com/freelancers/~0126a9e3ea476741d8',
@@ -203,21 +203,22 @@ export const EXPERIENCES: ExperienceItem[] = [
     linkedinUrl: 'https://www.linkedin.com/in/shamim4s4/'
   },
   {
-    id: 'exp-japna',
-    role: 'IT Manager',
-    company: 'Japna Bangladesh Ltd.',
+    id: 'exp-drake-digital',
+    role: 'AI Agent Developer & IT Manager & Twilio Expert',
+    company: 'Drake Digital Marketing Agency, Toronto, Canada',
     type: 'Full-Time',
-    location: 'Dhaka, Bangladesh · Hybrid',
+    location: 'Toronto, Canada (Remote)',
     period: 'Oct 2024 - Present',
     current: true,
-    description: 'Directing enterprise IT operations, hardware lifecycle management, local networking topology, and secure system administration for Japna Bangladesh Ltd.',
+    description: 'Directing AI agent development, enterprise Twilio communication APIs (Voice, SMS, Studio, WhatsApp), digital marketing automation pipelines, and core IT infrastructure management for Drake Digital Marketing Agency, Toronto, Canada.',
     highlights: [
-      'Overseeing complete corporate IT infrastructure, hardware workstations, and server assets.',
-      'Architecting secure hybrid network connectivity with robust firewall policies and internal VPN tunnels.',
-      'Providing cross-functional IT leadership, technical support, and disaster recovery planning.'
+      'Engineering autonomous AI agents integrated with Twilio APIs for automated client communication, smart SMS sequences, and real-time voice call routing.',
+      'Overseeing full agency IT infrastructure, cloud server management, DNS routing, secure credential vaults, and DevOps automation workflows.',
+      'Architecting end-to-end Twilio Studio flows, programmable messaging webhooks, and conversational AI assistant pipelines connecting CRMs to marketing funnels.',
+      'Maintaining high-availability cloud servers, performance tuning, and zero-downtime server operations for marketing client platforms.'
     ],
-    techStack: ['Computer Hardware', 'Computer Networking', 'Linux', 'Windows Server', 'Network Security', 'Firewalls'],
-    link: 'https://www.linkedin.com/in/shamim4s4/',
+    techStack: ['AI Agents', 'Twilio (Voice, SMS, Studio)', 'IT Management', 'API Integrations', 'Cloud Infrastructure', 'Python', 'Node.js', 'Linux', 'Webhooks'],
+    link: 'https://www.drakedigital.com/about/',
     linkedinUrl: 'https://www.linkedin.com/in/shamim4s4/'
   },
   {
@@ -854,13 +855,13 @@ export const RESUME_DATA = {
   github: 'https://github.com/shamim4s',
   linkedin: 'https://www.linkedin.com/in/shamim4s4/',
   website: 'https://shamim4s.github.io',
-  summary: 'Results-driven AI Agent Developer, Cloud Infrastructure Engineer and IT Consultant with 16+ years of expertise building autonomous AI agents, multi-agent workflows, designing, hardening, and automating high-availability server platforms. Proven track record auditing 150+ production servers, containerizing complex web applications with Docker, implementing zero-trust security postures, and optimizing cloud architectures across AWS, GCP, and Proxmox VE environments.',
+  summary: 'Results-driven AI Agent Developer, IT Manager & Twilio Expert, Cloud Infrastructure Engineer, and IT Consultant with 16+ years of expertise building autonomous AI agents, multi-agent workflows, enterprise Twilio communication APIs (Voice, SMS, Studio, WhatsApp), designing, hardening, and automating high-availability server platforms. Proven track record directing agency IT operations, auditing 150+ production servers, containerizing complex web applications with Docker, implementing zero-trust security postures, and optimizing cloud architectures across AWS, GCP, and Proxmox VE environments.',
   skills: {
     operatingSystems: ['Ubuntu', 'Debian', 'Red Hat Enterprise Linux (RHEL)', 'AlmaLinux', 'Rocky Linux', 'Alpine Linux'],
     cloudAndVirtualization: ['AWS (EC2, S3, RDS, VPC, Route53, IAM)', 'Google Cloud Platform (GCP)', 'Proxmox VE', 'KVM', 'VMware ESXi'],
     containersAndWebServers: ['Docker', 'Docker Compose', 'Kubernetes (k3s)', 'NGINX', 'Apache HTTP Server', 'HestiaCP', 'cPanel', 'Cloudflare'],
     securityAndNetworking: ['Server Hardening', 'CIS Benchmarks', 'UFW / Iptables / Firewalld', 'Fail2ban', 'SSH Zero-Trust', 'SSL/TLS (Let’s Encrypt)', 'WireGuard VPN'],
-    devOpsAndAutomation: ['Bash Scripting', 'GitHub Actions', 'Jenkins', 'Terraform', 'Git', 'Ansible basics', 'Cron & Systemd automation'],
+    devOpsAndAutomation: ['AI Agents & MCP', 'Twilio (Voice, SMS, WhatsApp, Studio)', 'Bash Scripting', 'GitHub Actions', 'Jenkins', 'Terraform', 'Git', 'Cron & Systemd automation'],
     databasesAndMonitoring: ['MySQL', 'MariaDB', 'PostgreSQL', 'Redis Cache', 'Prometheus', 'Grafana', 'Uptime Kuma']
   },
   certifications: [

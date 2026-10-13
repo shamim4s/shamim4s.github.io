@@ -62,17 +62,19 @@ export const ExperienceSection: React.FC = () => {
                     </div>
 
                     <div className="flex items-center gap-2 mt-1 text-emerald-600 dark:text-emerald-400 font-semibold text-sm flex-wrap">
-                      <span>{exp.company}</span>
-                      {exp.link && (
+                      {exp.link ? (
                         <a
                           href={exp.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-slate-400 hover:text-emerald-500 transition-colors"
-                          title="Visit link"
+                          className="hover:underline hover:text-emerald-700 dark:hover:text-emerald-300 inline-flex items-center gap-1.5 transition-colors group"
+                          title={`Visit ${exp.company}`}
                         >
-                          <ExternalLink className="w-3.5 h-3.5" />
+                          <span>{exp.company}</span>
+                          <ExternalLink className="w-3.5 h-3.5 text-emerald-500 group-hover:translate-x-0.5 transition-transform" />
                         </a>
+                      ) : (
+                        <span>{exp.company}</span>
                       )}
                       <a
                         href={exp.linkedinUrl || "https://www.linkedin.com/in/shamim4s4/"}
