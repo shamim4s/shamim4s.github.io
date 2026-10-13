@@ -7,7 +7,8 @@ import {
   Star, 
   MapPin, 
   Award,
-  CheckCircle2
+  CheckCircle2,
+  Github
 } from 'lucide-react';
 import { PERSONAL_INFO, UPWORK_PROFILE_STATS } from '../data/portfolioData';
 
@@ -313,7 +314,7 @@ export const HomeSection: React.FC = () => {
             href="https://www.upwork.com/freelancers/~0126a9e3ea476741d8"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-600/25 hover:shadow-xl hover:-translate-y-0.5 transition-all"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm bg-slate-900 border border-emerald-500 text-emerald-500 hover:bg-emerald-500 hover:text-white shadow-lg shadow-emerald-950/20 hover:shadow-xl hover:-translate-y-0.5 transition-all"
           >
             <Briefcase className="w-4 h-4" />
             <span>Hire on Upwork</span>
@@ -324,22 +325,33 @@ export const HomeSection: React.FC = () => {
             href="https://www.linkedin.com/in/shamim4s4/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm bg-white dark:bg-slate-900 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-800 hover:border-emerald-500 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm bg-slate-900 border border-emerald-500 text-emerald-500 hover:bg-emerald-500 hover:text-white shadow-lg shadow-emerald-950/20 hover:shadow-xl hover:-translate-y-0.5 transition-all"
           >
             <span>LinkedIn Profile</span>
-            <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
+            <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+
+          <a
+            href={PERSONAL_INFO.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm bg-slate-900 border border-emerald-500 text-emerald-500 hover:bg-emerald-500 hover:text-white shadow-lg shadow-emerald-950/20 hover:shadow-xl hover:-translate-y-0.5 transition-all"
+          >
+            <Github className="w-4 h-4" />
+            <span>GitHub Profile</span>
+            <ExternalLink className="w-3.5 h-3.5" />
           </a>
 
           <a
             href="#reviews"
-            className="inline-flex items-center gap-1.5 px-5 py-3 rounded-xl font-medium text-sm text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-100 dark:hover:bg-slate-900 border border-transparent hover:border-slate-200 dark:hover:border-slate-800 transition-all"
+            className="inline-flex items-center gap-1.5 px-6 py-3 rounded-xl font-semibold text-sm bg-slate-900 border border-emerald-500 text-emerald-500 hover:bg-emerald-500 hover:text-white shadow-lg shadow-emerald-950/20 hover:shadow-xl hover:-translate-y-0.5 transition-all"
           >
             <span>Customer Reviews</span>
           </a>
 
           <a
             href="#experience"
-            className="inline-flex items-center gap-1.5 px-5 py-3 rounded-xl font-medium text-sm text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-100 dark:hover:bg-slate-900 border border-transparent hover:border-slate-200 dark:hover:border-slate-800 transition-all"
+            className="inline-flex items-center gap-1.5 px-6 py-3 rounded-xl font-semibold text-sm bg-slate-900 border border-emerald-500 text-emerald-500 hover:bg-emerald-500 hover:text-white shadow-lg shadow-emerald-950/20 hover:shadow-xl hover:-translate-y-0.5 transition-all"
           >
             <span>Experience (16+ yrs)</span>
           </a>
