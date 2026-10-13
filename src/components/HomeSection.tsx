@@ -235,7 +235,7 @@ export const HomeSection: React.FC = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/10 dark:bg-emerald-500/15 rounded-full blur-3xl pointer-events-none" />
 
       {/* Main Centered Content */}
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pointer-events-auto">
+      <div className="relative z-10 max-w-5xl xl:max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center pointer-events-auto">
         
         {/* Profile Picture with Round Border in Middle */}
         <div className="flex justify-center mb-6">
@@ -276,19 +276,24 @@ export const HomeSection: React.FC = () => {
         </h2>
 
         {/* Company & Role Tagline */}
-        <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 mt-3 max-w-2xl mx-auto leading-relaxed">
-          <span className="font-semibold text-emerald-600 dark:text-emerald-400">AI Agent Developer & IT Manager & Twilio Expert</span> at{' '}
-          <a
-            href="https://www.drakedigital.com/about/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-semibold text-slate-900 dark:text-white underline decoration-emerald-500/60 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors inline-flex items-center gap-1 group"
-          >
-            <span>Drake Digital Marketing Agency, Toronto, Canada</span>
-            <ExternalLink className="w-3.5 h-3.5 inline text-emerald-500 shrink-0 group-hover:translate-x-0.5 transition-transform" />
-          </a>{' '}
-          · Professional Upwork IT Consultant with <span className="font-semibold text-emerald-600 dark:text-emerald-400">16+ years</span> in Autonomous Agents, LLM Systems, Cloud & Linux Server Hardening.
-        </p>
+        <div className="mt-4 max-w-5xl mx-auto">
+          <p className="text-sm sm:text-base md:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+            <span className="font-semibold text-emerald-600 dark:text-emerald-400">AI Agent Developer & IT Manager & Twilio Expert</span> at{' '}
+            <a
+              href="https://www.drakedigital.com/about/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-slate-900 dark:text-white underline decoration-emerald-500/60 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors inline-flex items-center gap-1 group"
+            >
+              <span>Drake Digital Marketing Agency, Toronto, Canada</span>
+              <ExternalLink className="w-3.5 h-3.5 inline text-emerald-500 shrink-0 group-hover:translate-x-0.5 transition-transform" />
+            </a>
+          </p>
+
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 mt-3 max-w-3xl mx-auto leading-relaxed">
+            Professional Upwork IT Consultant with <span className="font-semibold text-emerald-600 dark:text-emerald-400">16+ years</span> in Autonomous Agents, LLM Systems, Cloud & Linux Server Hardening.
+          </p>
+        </div>
 
         {/* Trust Badges */}
         <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-6 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300">
@@ -309,49 +314,49 @@ export const HomeSection: React.FC = () => {
         </div>
 
         {/* Action CTAs */}
-        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-8">
+        <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mt-8">
           <a
             href="https://www.upwork.com/freelancers/~0126a9e3ea476741d8"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm bg-slate-900 border border-emerald-500 text-emerald-500 hover:bg-emerald-500 hover:text-white shadow-lg shadow-emerald-950/20 hover:shadow-xl hover:-translate-y-0.5 transition-all"
+            className="inline-flex items-center gap-1.5 px-2 py-2.5 rounded-xl font-semibold text-xs sm:text-sm bg-slate-900 border border-emerald-500 text-emerald-500 hover:bg-emerald-500 hover:text-white shadow-lg shadow-emerald-950/20 hover:shadow-xl hover:-translate-y-0.5 transition-all"
           >
-            <Briefcase className="w-4 h-4" />
+            <Briefcase className="w-4 h-4 shrink-0" />
             <span>Hire on Upwork</span>
-            <ExternalLink className="w-3.5 h-3.5" />
+            <ExternalLink className="w-3.5 h-3.5 shrink-0" />
           </a>
 
           <a
             href="https://www.linkedin.com/in/shamim4s4/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm bg-slate-900 border border-emerald-500 text-emerald-500 hover:bg-emerald-500 hover:text-white shadow-lg shadow-emerald-950/20 hover:shadow-xl hover:-translate-y-0.5 transition-all"
+            className="inline-flex items-center gap-1.5 px-2 py-2.5 rounded-xl font-semibold text-xs sm:text-sm bg-slate-900 border border-emerald-500 text-emerald-500 hover:bg-emerald-500 hover:text-white shadow-lg shadow-emerald-950/20 hover:shadow-xl hover:-translate-y-0.5 transition-all"
           >
             <span>LinkedIn Profile</span>
-            <ExternalLink className="w-3.5 h-3.5" />
+            <ExternalLink className="w-3.5 h-3.5 shrink-0" />
           </a>
 
           <a
             href={PERSONAL_INFO.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm bg-slate-900 border border-emerald-500 text-emerald-500 hover:bg-emerald-500 hover:text-white shadow-lg shadow-emerald-950/20 hover:shadow-xl hover:-translate-y-0.5 transition-all"
+            className="inline-flex items-center gap-1.5 px-2 py-2.5 rounded-xl font-semibold text-xs sm:text-sm bg-slate-900 border border-emerald-500 text-emerald-500 hover:bg-emerald-500 hover:text-white shadow-lg shadow-emerald-950/20 hover:shadow-xl hover:-translate-y-0.5 transition-all"
           >
-            <Github className="w-4 h-4" />
+            <Github className="w-4 h-4 shrink-0" />
             <span>GitHub Profile</span>
-            <ExternalLink className="w-3.5 h-3.5" />
+            <ExternalLink className="w-3.5 h-3.5 shrink-0" />
           </a>
 
           <a
             href="#reviews"
-            className="inline-flex items-center gap-1.5 px-6 py-3 rounded-xl font-semibold text-sm bg-slate-900 border border-emerald-500 text-emerald-500 hover:bg-emerald-500 hover:text-white shadow-lg shadow-emerald-950/20 hover:shadow-xl hover:-translate-y-0.5 transition-all"
+            className="inline-flex items-center gap-1 px-2 py-2.5 rounded-xl font-semibold text-xs sm:text-sm bg-slate-900 border border-emerald-500 text-emerald-500 hover:bg-emerald-500 hover:text-white shadow-lg shadow-emerald-950/20 hover:shadow-xl hover:-translate-y-0.5 transition-all"
           >
             <span>Customer Reviews</span>
           </a>
 
           <a
             href="#experience"
-            className="inline-flex items-center gap-1.5 px-6 py-3 rounded-xl font-semibold text-sm bg-slate-900 border border-emerald-500 text-emerald-500 hover:bg-emerald-500 hover:text-white shadow-lg shadow-emerald-950/20 hover:shadow-xl hover:-translate-y-0.5 transition-all"
+            className="inline-flex items-center gap-1 px-2 py-2.5 rounded-xl font-semibold text-xs sm:text-sm bg-slate-900 border border-emerald-500 text-emerald-500 hover:bg-emerald-500 hover:text-white shadow-lg shadow-emerald-950/20 hover:shadow-xl hover:-translate-y-0.5 transition-all"
           >
             <span>Experience (16+ yrs)</span>
           </a>
